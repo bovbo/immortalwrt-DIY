@@ -31,4 +31,5 @@ echo "CONFIG_BPF_TOOLCHAIN_BUILD=y" >> .config
 echo "CONFIG_USE_LLVM_BUILD=y" >> .config
 
 # 可选：强制重新生成配置（保险）
+./scripts/feeds install -a
 make defconfig
