@@ -1,0 +1,16 @@
+#!/bin/sh
+# 首次开机自动执行一次:设置 LAN 地址、root 密码、默认主题
+# 打包进固件的 files/etc/uci-defaults/ 目录下,固件启动后会自动运行并删除自身
+
+# LAN 地址改为 192.168.8.1(需与 dhcp 配置里的 dhcp_option 6 保持一致,已同步)
+uci set network.lan.ipaddr='192.168.8.1'
+uci commit network
+
+# root 密码设为 root88
+(echo 'root88'; echo 'root88') | passwd root >/dev/null 2>&1
+
+# 默认 LuCI 主题切换为 argon
+uci set luci.main.mediaurlbase='/luci-static/argon'
+uci commit luci
+
+exit 0
