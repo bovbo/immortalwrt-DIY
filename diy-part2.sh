@@ -9,7 +9,7 @@
 # This is free software, licensed under the MIT License.
 # See /LICENSE for more information.
 #
-chmod +x files/etc/uci-defaults/* 2>/dev/null
+
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
@@ -18,3 +18,11 @@ chmod +x files/etc/uci-defaults/* 2>/dev/null
 
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
+
+chmod +x files/etc/uci-defaults/* 2>/dev/null
+
+# 在 diy-part2.sh 或 .config 里
+sed -i 's/CONFIG_BPF_TOOLCHAIN_HOST=y/# CONFIG_BPF_TOOLCHAIN_HOST is not set/' .config
+echo "CONFIG_BPF_TOOLCHAIN_BUILD=y" >> .config
+# 或者确保
+echo "CONFIG_USE_LLVM_BUILD=y" >> .config
