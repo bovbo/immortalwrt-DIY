@@ -1,18 +1,6 @@
 #!/bin/bash
-#
-# https://github.com/P3TERX/Actions-OpenWrt
-# File name: diy-part1.sh
-# Description: OpenWrt DIY script part 1 (Before Update feeds)
-#
-# Copyright (c) 2019-2024 P3TERX <https://p3terx.com>
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
+# diy-part1.sh —— 拉取源码后、feeds update 之前执行
+# 追加第三方 feeds 源，带 grep 判断防止每次编译重复追加
 
-# Uncomment a feed source
-#sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
-
-# Add a feed source
-echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-#echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+grep -q 'kenzok8/openwrt-daede' feeds.conf.default || sed -i '$a src-git daede https://github.com/kenzok8/openwrt-daede.git' feeds.conf.default
+grep -q 'kenzok8/small-package' feeds.conf.default || sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
