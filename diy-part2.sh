@@ -21,8 +21,14 @@
 
 chmod +x files/etc/uci-defaults/* 2>/dev/null
 
-# 在 diy-part2.sh 或 .config 里
+# ===== 修复 daed eBPF 编译：改用 OpenWrt 自带的 llvm-bpf =====
+# 关闭 Host 工具链
 sed -i 's/CONFIG_BPF_TOOLCHAIN_HOST=y/# CONFIG_BPF_TOOLCHAIN_HOST is not set/' .config
+sed -i 's/CONFIG_USE_LLVM_HOST=y/# CONFIG_USE_LLVM_HOST is not set/' .config
+
+# 开启 Build 方式
 echo "CONFIG_BPF_TOOLCHAIN_BUILD=y" >> .config
-# 或者确保
 echo "CONFIG_USE_LLVM_BUILD=y" >> .config
+
+# 可选：强制重新生成配置（保险）
+make defconfig
