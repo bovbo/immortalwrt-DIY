@@ -36,7 +36,8 @@ sed -i 's/CONFIG_BPF_TOOLCHAIN_BUILD_LLVM=y/# CONFIG_BPF_TOOLCHAIN_BUILD_LLVM is
 sed -i 's/CONFIG_USE_LLVM_BUILD=y/# CONFIG_USE_LLVM_BUILD is not set/' .config
 sed -i 's/CONFIG_BPF_TOOLCHAIN_HOST=y/# CONFIG_BPF_TOOLCHAIN_HOST is not set/' .config
 sed -i 's/CONFIG_USE_LLVM_HOST=y/# CONFIG_USE_LLVM_HOST is not set/' .config
-
+# 暂时关闭 geoview（PassWall 依赖，当前源有 Go 模块问题）
+sed -i 's/CONFIG_PACKAGE_geoview=y/# CONFIG_PACKAGE_geoview is not set/' .config
 # ============================================================
 # 3. 强制保留内核 eBPF / BTF 支持（daed 运行必需）
 # ============================================================
